@@ -176,7 +176,13 @@ schedule are offered in your first report's Setup section, each with a prompt th
   (`$CLAUDE_CONFIG_DIR`, else `~/.claude`) and keeps everything in that profile's `remodel/` folder.
   A second profile (say `CLAUDE_CONFIG_DIR=~/.claude-work`) gets its own history, report page and
   cards. Profiles never read each other.
-- Long key-like tokens are masked before any quote reaches a report.
+- Secrets are masked before any quote reaches a report: API keys in common formats (OpenAI,
+  Stripe, GitHub, Google, Slack, AWS), JWTs, private keys, passwords in URLs and `password=…`-style
+  values.
+- The skill pre-approves only its own scripts and reading files. Writing `report.json` asks you
+  first, and the weekly schedule can only write inside the profile's `remodel/` folder.
+- The report page lets only you write answers to it. Remodel keeps a tap only as a fixed choice
+  and never reads free text from the page.
 - Everything except the published page stays on this machine.
 
 ## Requirements

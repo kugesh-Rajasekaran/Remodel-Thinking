@@ -137,7 +137,7 @@ It runs `claude -p` at 20:00 on Sundays, then `launchctl load` registers it:
   <key>Label</key><string>com.remodel.weekly.<profile name></string>
   <key>ProgramArguments</key><array>
     <string>/bin/zsh</string><string>-lc</string>
-    <string>cd ~ &amp;&amp; CLAUDE_CONFIG_DIR="<profile>" <claude binary> -p "/remodel goal" --allowedTools "Bash(python3 <skill dir>/scripts/*),Bash(open *),Read,Write" --permission-mode acceptEdits --max-turns 40 &gt;&gt; <profile>/remodel/weekly.log 2&gt;&amp;1</string>
+    <string>cd "<profile>/remodel" &amp;&amp; CLAUDE_CONFIG_DIR="<profile>" <claude binary> -p "/remodel goal" --allowedTools "Bash(python3 <skill dir>/scripts/*),Read(/<profile>/remodel/**),Read(/<skill dir>/**),Edit(/<profile>/remodel/**)" --max-turns 40 &gt;&gt; <profile>/remodel/weekly.log 2&gt;&amp;1</string>
   </array>
   <key>StartCalendarInterval</key><dict>
     <key>Weekday</key><integer>0</integer><key>Hour</key><integer>20</integer><key>Minute</key><integer>0</integer>
@@ -148,3 +148,9 @@ It runs `claude -p` at 20:00 on Sundays, then `launchctl load` registers it:
 Use `/remodel` instead of `/remodel goal` when the ledger's mode is `normal`. Use the absolute path
 of `claude` (`command -v claude` in a normal terminal), because launchd does not load the shell
 PATH. Done when `launchctl list | grep com.remodel.weekly` shows the job.
+
+The run starts inside `<profile>/remodel` and may only read that folder and the skill, and only
+write inside that folder (`Read(/…)` and `Edit(/…)` with the extra leading slash are absolute paths;
+`Edit` covers every file-writing tool). Nothing else is pre-approved, and a headless run cannot ask,
+so anything outside that scope is refused. Never add `--permission-mode acceptEdits`, `Write` or
+`Bash(open *)` to this command.
