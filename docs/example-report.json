@@ -1,0 +1,96 @@
+{
+  "mode": "normal",
+  "window": {"from": "2026-10-01", "to": "2026-10-30", "days": 30, "chosen": false, "typed_prompts": 214},
+  "persona": {"id": "musk"},
+  "verdict": "You rebuilt the same CSV import by hand four times. Your product has no price. And a third of your week went to internal tooling nobody asked for.",
+  "facts": [
+    {"value": "4", "label": "customer imports done by hand in 30 days"},
+    {"value": "0", "label": "prompts about price or unit cost"},
+    {"value": "31%", "label": "of this week's prompts on internal tooling"}
+  ],
+  "insights": {
+    "models": [
+      {"problem": "hand-imports", "old": "Fix this customer's data by hand.", "new": "Build the import once, for every customer."},
+      {"problem": "no-price", "old": "Price comes once the product is right.", "new": "Price from the inputs up, before the next feature."},
+      {"problem": "tooling-first", "old": "Better tooling is progress on the company.", "new": "The next hour goes to the next paying customer."}
+    ],
+    "process": [
+      {"when": "Before you build", "rule": "question the requirement, delete, simplify, then speed up. Automate last.", "problem": "hand-imports"},
+      {"when": "Before you call it done", "rule": "name the real test first, then ask Claude for its output, never \"are you sure?\".", "problem": "hand-imports"},
+      {"when": "Before any tool work", "rule": "name the customer or the number it moves. No name, no work.", "problem": "tooling-first"}
+    ],
+    "do_first": [
+      {"when": "Today", "text": "Paste the hooks prompt (Setup). One minute."},
+      {"when": "Mon 2 Nov", "text": "Self-serve CSV import live, proven on one real upload."},
+      {"when": "Tue 3 Nov", "text": "A price sent to your two pilot customers."}
+    ]
+  },
+  "problems": [
+    {
+      "id": "hand-imports", "tab": "Hand imports", "title": "The manual import step should not exist",
+      "status": "repeating", "status_note": "4 times in 30 days", "type": "process",
+      "call": "Four CSV imports done by hand for two customers, each one an evening of SQL. Customer 100 would cost exactly the same as customer 2. Then you asked \"are you sure?\" three times instead of checking one real upload.",
+      "quote": {"text": "\"possibly the most common error of a smart engineer is to optimize the thing that should not exist\"", "source": "Elon Musk, Starbase tour, 2021"},
+      "evidence": {"summary": "Imports on 6, 13, 22 and 28 Oct for two customers; 3 of 8 prompts on 28 Oct asked whether it was right.",
+        "prompts": [
+          {"ts": "10-22 21:40", "quote": "import this customer's CSV again, same columns as last time"},
+          {"ts": "10-28 22:05", "quote": "give me the SQL to fix the totals for this account"},
+          {"ts": "10-28 22:31", "quote": "are you sure the totals match now?"}
+        ]},
+      "old": "Fix this customer's data by hand, then ask the AI if it's right.",
+      "new": "Delete the manual step. Build the import once. Prove it on a real upload.",
+      "steps": [
+        {"name": "Question the requirement", "text": "Who said imports need you? Nobody. It's a habit."},
+        {"name": "Delete", "text": "No more hand SQL for imports, starting with the next one."},
+        {"name": "Simplify", "text": "One CSV template and one validation rule."},
+        {"name": "Accelerate", "text": "Self-serve upload live before the next customer's file arrives."},
+        {"name": "Automate", "text": "Only then does the upload check totals by itself."}
+      ],
+      "deadline": {"when": "Monday 2 Nov", "done": "Done means one real customer upload lands with no SQL."},
+      "card": {"id": "think-at-scale", "status": "installing", "uses": 1}
+    },
+    {
+      "id": "no-price", "tab": "No price", "title": "You don't know what one customer costs you",
+      "status": "new", "type": "model",
+      "call": "Thirty days and not one prompt about price or unit cost. Two pilot customers use the product and neither has been asked to pay.",
+      "quote": {"text": "His Roadster cost $140k in parts and sold for $92k. He called that a \"life threatening problem\".", "source": "Quote: Elon Musk, Tesla blog, 2009"},
+      "evidence": {"summary": "No price and no cost per customer in any prompt.",
+        "prompts": [{"ts": "10-14 23:12", "quote": "what does the email provider charge us per 1,000 sends?"}]},
+      "old": "Price comes once the product is right.",
+      "new": "Price from the inputs up, and charge before the next feature.",
+      "steps": [
+        {"name": "Question the requirement", "text": "Who decided price comes after the product is perfect?"},
+        {"name": "Delete", "text": "Drop \"free until it's ready\"."},
+        {"name": "Simplify", "text": "One plan, one number per customer per month."},
+        {"name": "Accelerate", "text": "Cost tree from real bills by Sunday, price sent on Tuesday."},
+        {"name": "Automate", "text": "Later, the cost tree refreshes from the bills every month."}
+      ],
+      "deadline": {"when": "Tuesday 3 Nov", "done": "Both pilot customers have a price in writing."},
+      "questions": [{"id": "unit-cost", "text": "What does one customer cost you per month?", "options": ["Under $5", "$5–20", "Over $20", "No idea"]}],
+      "card": {"id": "musk-cost-from-inputs", "status": "queued"}
+    },
+    {
+      "id": "tooling-first", "tab": "Tooling first", "title": "You are building tools instead of the company",
+      "status": "new", "type": "model",
+      "call": "31% of this week's prompts went to internal tooling. Not one prompt in 30 days is about winning customer three.",
+      "evidence": {"summary": "Tooling prompts on 5 of 7 days this week.",
+        "prompts": [{"ts": "10-29 23:50", "quote": "add a dashboard for my deploy scripts"}]},
+      "old": "Better tooling is progress on the company.",
+      "new": "The company has two customers. The next hour goes to the third.",
+      "steps": [
+        {"name": "Question the requirement", "text": "Which customer or revenue number does this tool move?"},
+        {"name": "Delete", "text": "Park every tooling idea in one notes file."},
+        {"name": "Simplify", "text": "One tooling hour a week, on Fridays."},
+        {"name": "Accelerate", "text": "Book one customer call before Wednesday."},
+        {"name": "Automate", "text": "Let the weekly schedule run the reviews for you."}
+      ],
+      "deadline": {"when": "Wednesday 4 Nov", "done": "One customer call held, and the answer written down."},
+      "card": {"id": "seller-first", "status": "new", "uses": 0}
+    }
+  ],
+  "setup": [
+    {"title": "Install the Remodel hooks", "status": "Not done", "where": "~/.claude/settings.json",
+     "prompt": "Apply this Remodel correction.\nWhy: the cards only get practised if Claude sees them in every session.\nChange: ~/.claude/settings.json: add the Remodel SessionStart and UserPromptSubmit hooks.\nRules: back up the file first, show me the diff before saving, change nothing else.\nDone when: a new session shows \"Remodel · practising: …\"."}
+  ],
+  "queue": ["musk-cost-from-inputs", "outcome-first"]
+}

@@ -461,6 +461,12 @@ class RenderTests(Base):
         self.assertEqual(state["history"][-1]["window"]["to"], "2026-10-31")
         self.assertEqual(state["patterns"]["hand-fix"]["new"], "Fix the rule for everyone")
 
+    def test_readme_example_renders(self):
+        example = SCRIPTS.parent.parent / "docs" / "example-report.json"
+        result, html = self.render(example)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("Musk&#x27;s five steps, applied", html)
+
     def test_still_problem_offers_still_true(self):
         result, html = self.render(self.report(problems=[self.problem(status="still", status_note="asked last run")]))
         self.assertEqual(result.returncode, 0, result.stderr)

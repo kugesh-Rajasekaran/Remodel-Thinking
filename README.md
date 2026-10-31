@@ -19,6 +19,13 @@ run publishes a Claude artifact page that reads top to bottom:
 Taps on the page are saved to the page's database and read by the next run. The theme follows
 your light or dark setting and is built for easy reading. `--pdf` also writes a printable copy.
 
+### Example
+
+A report for a fictional founder of a small software product, read through the Elon Musk lens
+(made-up data; the input is [`docs/example-report.json`](docs/example-report.json)):
+
+<p align="center"><img src="docs/example-report.png" alt="Example Remodel report: headline, three numbers, tabs, actionable insights and the first problem" width="560"></p>
+
 ```
 /remodel                                        # normal mode: fix how you think
 /remodel goal "Reach $1M in yearly revenue"     # goal mode: what the goal demands
