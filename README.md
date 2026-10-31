@@ -4,20 +4,9 @@
 
 Remodel is a Claude Code skill. It reads your own prompt history, works back from what you
 repeatedly do to the thinking behind it, and installs a better habit one card at a time. Every
-run publishes a Claude artifact page that reads top to bottom:
-
-1. **Top line**: mode, lens and the time frame analysed ("Sessions analysed: 2 Oct – 31 Oct 2026 · 287 prompts").
-2. **Headline** naming the problems in order, and up to three numbers.
-3. **Tabs**, pinned while you scroll: Actionable insights · one tab per problem · Setup.
-4. **Actionable insights**: the beliefs to change (mental models), the order of work to change
-   (thinking process), and a dated "Do first" list.
-5. **One block per problem** (at most three), each telling its whole story: what it costs,
-   evidence from your prompts, old → new thinking, the steps for next time, a deadline, the card
-   Claude will ask you, and "Is this you?" taps.
-6. **Setup**: one-time changes to Claude, each with a **Copy prompt** button.
-
-Taps on the page are saved to the page's database and read by the next run. The theme follows
-your light or dark setting and is built for easy reading. `--pdf` also writes a printable copy.
+run publishes a private Claude artifact page: a blunt headline, actionable insights (what to
+believe, what order to work in, what to do first), up to three problems with evidence and next
+steps, and copy-ready setup prompts. Your taps on the page feed the next run.
 
 ### Example
 
@@ -25,6 +14,8 @@ A report for a fictional founder of a small software product, read through the E
 (made-up data; the input is [`docs/example-report.json`](docs/example-report.json)):
 
 <p align="center"><img src="docs/example-report.png" alt="Example Remodel report: headline, three numbers, tabs, actionable insights and the first problem" width="560"></p>
+
+### Usage
 
 ```
 /remodel                                        # normal mode: fix how you think
