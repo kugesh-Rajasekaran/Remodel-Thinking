@@ -13,7 +13,7 @@ steps, and copy-ready setup prompts. Your taps on the page feed the next run.
 A report for a fictional founder of a small software product, read through the Elon Musk lens
 (made-up data; the input is [`docs/example-report.json`](docs/example-report.json)):
 
-<p align="center"><img src="docs/example-report.png" alt="Example Remodel report: headline, three numbers, tabs, actionable insights and the first problem" width="560"></p>
+<p align="center"><img src="docs/example-report.png" alt="Example Remodel report: headline, three numbers, tabs and actionable insights" width="480"></p>
 
 ### Usage
 
